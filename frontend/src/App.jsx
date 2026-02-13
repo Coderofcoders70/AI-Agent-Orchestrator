@@ -21,8 +21,7 @@ const App = () => {
   `);
   const [explanation, setExplanation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  // Load history on initial mount 
+ 
   useEffect(() => {
     fetchHistory();
   }, []);
