@@ -8,7 +8,7 @@ const UIVersion = require('./models/UIVersion');
 const app = express();
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? 'https://ai-agent-orchestrator-i9dz.onrender.com' 
+    ? 'https://ai-agent-orchestrator-nine.vercel.app' 
     : 'http://localhost:5173'
 }));
 app.use(express.json());
