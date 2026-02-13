@@ -6,10 +6,25 @@ const { runAgentFlow } = require('./services/agentService');
 const UIVersion = require('./models/UIVersion');
 
 const app = express();
+
+const allowedOrigins = [
+  'https://ai-agent-orchestrator-nine.vercel.app', 
+  'http://localhost:5173',                         
+  'http://localhost:5000'                          
+];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? 'https://ai-agent-orchestrator-nine.vercel.app' 
-    : 'http://localhost:5173'
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
 }));
 app.use(express.json());
 
